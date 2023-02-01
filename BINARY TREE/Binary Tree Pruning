@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool isleaf(TreeNode* root)
+    {
+        if(root->left==NULL && root->right==NULL)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    TreeNode* postorder(TreeNode* root,int target)
+    {
+        if(root==NULL)
+        {
+            return NULL;
+        }
+        root->left=postorder(root->left,target);
+        root->right=postorder(root->right,target);
+        if(root->val==target && isleaf(root))
+        {
+            return NULL;
+        }
+        return root;
+    }
+
+    
+    TreeNode* pruneTree(TreeNode* root) {
+        
+        return postorder(root,0);
+       
+
+
+    }
+};
