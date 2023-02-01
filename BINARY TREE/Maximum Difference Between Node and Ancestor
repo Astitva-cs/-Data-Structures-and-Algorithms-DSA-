@@ -1,0 +1,40 @@
+class Solution {
+public:
+   int res=0;
+
+   void maxi(TreeNode* root,vector<int> &store)
+   { 
+       if(root==NULL)
+       {
+           return ;
+       }
+
+       int key=root->val;
+       store.push_back(key);
+
+       for(int i=0;i<store.size();i++)
+       {
+           res=max(res,abs(key-store[i]));
+       
+       }
+
+       maxi(root->left,store);
+       maxi(root->right,store);
+       store.pop_back();
+
+   }
+
+
+    int maxAncestorDiff(TreeNode* root) {
+
+        vector<int> store;
+        if(root==NULL)
+        {
+            return 0;
+        }
+        maxi(root,store);
+
+        return res;
+        
+    }
+};
