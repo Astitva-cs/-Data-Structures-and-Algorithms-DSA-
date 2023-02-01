@@ -1,0 +1,43 @@
+class Solution
+{
+  public:
+   
+    
+    Node*prev=NULL;
+    Node *head;
+    
+    void BtCDLL(Node* root)
+    {
+        if(root==NULL)
+        {
+            return ;
+        }
+        
+        BtCDLL(root->left);
+        if(prev==NULL)
+        {
+            head=root;
+        }
+        else
+        {
+            root->left=prev;
+            prev->right=root;
+        }
+        prev=root;
+        
+        BtCDLL(root->right);
+        
+        prev->right=head;
+        head->left=prev;
+    }
+    
+    
+    Node *bTreeToCList(Node *root)
+    {
+           
+           
+           BtCDLL(root);
+           
+           return head;
+    }
+};
