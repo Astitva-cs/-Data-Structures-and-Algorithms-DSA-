@@ -1,0 +1,39 @@
+class Solution {
+    
+public:
+    void preorder(TreeNode* root,int &sum)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+
+        sum+=root->val;
+        preorder(root->left,sum);
+        preorder(root->right,sum);
+    }
+
+    void gst(TreeNode* root,int sum,int &sum2)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        gst(root->left,sum,sum2);
+        int x=root->val;
+        root->val=sum-sum2;
+        sum2+=x;
+        
+        gst(root->right,sum,sum2);
+    }
+   
+    TreeNode* bstToGst(TreeNode* root) {
+
+    int sum=0;
+    int sum2=0;
+    preorder(root,sum);
+    gst(root,sum,sum2);
+    return root;
+   
+    }
+};
