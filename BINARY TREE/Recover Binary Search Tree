@@ -1,0 +1,76 @@
+class Solution {
+public:
+
+    void inorder(TreeNode* root,vector<int>& ino)
+    {
+        if(root==NULL)
+        {
+            return ;
+        }
+
+        inorder(root->left,ino);
+        ino.push_back(root->val);
+        inorder(root->right,ino);
+    }
+    void inorderchange(TreeNode* root,int& min1,int &max1)
+    {
+        if(root==NULL)
+        {
+            return ;
+        }
+
+        inorderchange(root->left,min1,max1);
+        if(root->val==min1)
+        {
+            root->val=max1;
+            
+        }
+        else if(root->val==max1)
+        {
+            root->val=min1;
+            
+        }
+        
+        inorderchange(root->right,min1,max1);
+    }
+
+    void recoverTree(TreeNode* root) {
+
+        vector<int>arr;
+        inorder(root,arr);
+
+
+        for(int i=0;i<arr.size();i++)
+       {
+           cout<<arr[i]<<" ";
+       }
+
+cout<<endl;
+
+       int min1,max1;
+       for(int i=0;i<arr.size()-1;i++)
+       {
+           if(arr[i]>arr[i+1])
+           {
+              max1=arr[i];
+              break;
+           }
+       }
+       
+       
+       for(int i=1;i<arr.size();i++)
+       {
+          if(arr[i]<arr[i-1])
+          {
+            min1=arr[i];
+          }
+       }
+
+       cout<<min1<<" "<<max1<<" ";
+       
+      inorderchange(root,min1,max1);
+
+
+        
+    }
+};
