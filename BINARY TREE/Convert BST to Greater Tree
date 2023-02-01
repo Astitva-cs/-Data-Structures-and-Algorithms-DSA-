@@ -1,0 +1,24 @@
+class Solution {
+public:
+
+   void reverseinorder(TreeNode* root,int &sum)
+   {
+       if(root==NULL)
+       {
+           return ;
+       }
+       reverseinorder(root->right,sum);
+       sum+=root->val;
+       root->val=sum;
+       reverseinorder(root->left,sum);  
+
+   }
+
+
+  
+    TreeNode* convertBST(TreeNode* root) {
+        int sum=0;
+        reverseinorder(root,sum);
+        return root;
+    }
+};
