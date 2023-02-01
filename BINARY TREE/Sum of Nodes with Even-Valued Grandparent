@@ -1,0 +1,52 @@
+class Solution {
+public:
+    int sum=0;
+
+    void add(TreeNode* root,int &s)
+    {
+        if(root->left &&root->left->left)
+        {
+            s+=root->left->left->val;
+        }
+        if(root->left&&root->left->right)
+        {
+            s+=root->left->right->val;
+        }
+        if(root->right&&root->right->left)
+        {
+            s+=root->right->left->val;
+        }
+        if(root->right&&root->right->right)
+        {
+            s+=root->right->right->val;
+        }
+
+
+    }
+
+    void preorder(TreeNode* root)
+    {
+        if(root==NULL)
+        {
+            return ;
+        }
+
+        if((root->val)%2==0)
+        {
+           add(root,sum);
+        }
+
+        preorder(root->left);
+        preorder(root->right);
+    }
+
+
+    
+    int sumEvenGrandparent(TreeNode* root) {
+
+        preorder(root);
+        
+        return sum;
+        
+    }
+};
