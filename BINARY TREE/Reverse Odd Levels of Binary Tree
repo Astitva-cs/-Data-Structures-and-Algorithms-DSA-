@@ -1,0 +1,65 @@
+class Solution {
+public:
+    TreeNode* reverseOddLevels(TreeNode* root) {
+   if(root==NULL)
+   {
+       return root;
+   }
+
+   queue<TreeNode*> q;
+   q.push(root);
+   int level=0;
+
+   stack<int> st;
+
+   while(!q.empty())
+   {
+       int siz=q.size();
+
+
+       for(int i=0;i<siz;i++)
+       {
+           auto p=q.front();
+           q.pop();
+           if(level%2==0)
+           {
+                
+                
+                if(p->left)
+                 {
+                    q.push(p->left);
+                    st.push(p->left->val);
+                 }
+                 if(p->right)
+                {
+                    q.push(p->right);
+                    st.push(p->right->val);
+                }
+           }
+           else
+           { 
+               
+               p->val=st.top();
+               st.pop();
+               if(p->left)
+                 {
+                    q.push(p->left);
+                    
+                 }
+                 if(p->right)
+                {
+                    q.push(p->right);
+                   
+                }
+           }
+           
+          
+           
+       }
+       level++;
+   }
+
+return root;
+        
+    }
+};
