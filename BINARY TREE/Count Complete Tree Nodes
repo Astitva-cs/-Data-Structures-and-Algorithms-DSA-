@@ -1,0 +1,74 @@
+class Solution {
+public:
+    
+    int height(TreeNode *root)
+    {
+        if(root==NULL)
+        {
+            return 0;
+        }
+
+        return 1+height(root->left);
+
+
+
+    }
+
+    bool isleaf(TreeNode *root)
+    {
+        if(root->right==NULL && root->left==NULL)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    int countatlastlevel(TreeNode * root)
+    {
+        queue<TreeNode*> q;
+        if(root==NULL)
+        {
+            return 0;
+        }
+        q.push(root);
+        int last=0;
+
+        while(!q.empty())
+        {
+           last=q.size();
+            
+            for(int i=0;i<last;i++)
+            {
+                auto p=q.front();
+                q.pop();
+                if(p->left)
+                {
+                    q.push(p->left);
+
+                }
+                if(p->right)
+                {
+                    q.push(p->right);
+                }
+            }
+        }
+    
+    return last;
+    
+    }
+   
+
+    int countNodes(TreeNode* root) {
+        
+        int h=height(root);
+        int res=pow(2,h-1)-1;
+
+
+        int lastleaf=countatlastlevel(root);
+
+        cout<<h<<" "<<res<<" "<<lastleaf<<" "<<endl;
+        return res+lastleaf;
+
+    }
+};
