@@ -1,0 +1,45 @@
+
+void inorder(Node* root,vector<int>&res)
+{
+    if(root==NULL)
+    {
+        return ;
+    }
+    
+        inorder(root->left,res);
+        
+        
+        
+        if(root->left && !(root->right))
+        {
+            res.push_back(root->left->data);
+        }
+        if(root->right && !(root->left))
+        {
+            res.push_back(root->right->data);
+        }
+
+        inorder(root->right,res);
+    
+}
+
+
+
+
+
+vector<int> noSibling(Node* root)
+{
+   vector<int> res;
+   
+   inorder(root,res);
+   if(res.size()==0)
+   {
+       res.push_back(-1);
+   }
+   
+   sort(res.begin(),res.end());
+   
+   return res;
+   
+   
+}
