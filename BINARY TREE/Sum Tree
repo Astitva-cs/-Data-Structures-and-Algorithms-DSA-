@@ -1,0 +1,56 @@
+class Solution
+{
+    public:
+    
+    bool isleaf(Node* root)
+    {
+        if(root->left==NULL && root->right==NULL)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    
+    int sum(Node* root)
+    {
+        if(isleaf(root))
+        {
+            return root->data;
+        }
+        
+        int left=0,right=0;
+        if(root->left)
+        {
+            left=sum(root->left);
+        }
+         if(root->right)
+         {
+             right=sum(root->right);
+         }
+        
+        
+        
+        if(left==-1 ||right==-1)
+        {
+            return -1;
+        }
+        
+        if(left+right!=root->data)
+        {
+            return -1;
+        }
+        
+        return left+right+root->data;
+    }
+    
+    bool isSumTree(Node* root)
+    {
+         if(sum(root)==-1)
+         {
+             return false;
+         }
+         
+         return true;
+    }
+};
