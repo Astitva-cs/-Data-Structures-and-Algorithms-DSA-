@@ -1,0 +1,38 @@
+class Solution {
+public:
+    void distri(TreeNode *parent,TreeNode* child,int& cnt)
+    {
+        if(child==NULL)
+        {
+            return ;
+        }
+        distri(child,child->left,cnt);
+        distri(child,child->right,cnt);
+        if(child->val>1)
+        {
+            int extra=child->val-1;
+            child->val=1;
+            cnt+=extra;
+            parent->val+=extra;
+        }
+         if(child->val<1)
+        {
+            int need=1+abs(child->val);
+            child->val=1;
+            cnt+=need;
+            parent->val-=need;
+        }
+
+
+    }
+
+
+
+ 
+    int distributeCoins(TreeNode* root) {
+       
+        int cnt=0;
+        distri(root,root,cnt);
+        return cnt;
+    }
+};
