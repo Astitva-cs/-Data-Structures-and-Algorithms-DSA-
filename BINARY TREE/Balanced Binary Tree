@@ -1,0 +1,50 @@
+class Solution {
+public:
+
+   int Bala(TreeNode * root)
+   {
+      if(root==NULL)
+      {
+          return 0;
+      }
+      
+    int l=Bala(root->left);
+
+      if(l==-1)
+      {
+          return -1;
+      }
+    int r=Bala(root->right);
+    if(r==-1)
+    {
+        return -1;
+    }
+
+    if(abs(l-r)>=2)
+    {
+        return -1;
+    }
+    else
+    {
+        return max(l,r)+1;
+    }
+
+
+   }
+    
+
+
+    bool isBalanced(TreeNode* root) {
+        
+
+    if(Bala(root)==-1)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+
+    }
+};
