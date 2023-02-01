@@ -1,0 +1,54 @@
+bool isleaf(Node* root)
+{
+    if(root->left==NULL && root->right==NULL)
+    {
+        return true;
+    }
+    return false;
+}
+
+
+
+
+
+Node *convert(Node* root,Node* &prev,Node* &head)
+{
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    
+   
+    
+    if(isleaf(root))
+    {
+        if(prev==NULL)
+        {
+            head=root;
+        }
+        else
+        {
+            prev->right=root;
+            root->left=prev;
+        }
+        prev=root;
+        return NULL;
+    }
+     root->left=convert(root->left,prev,head);
+     root->right=convert(root->right,prev,head);
+    return root;
+}
+
+
+
+
+
+
+Node * convertToDLL(Node *root){
+    
+    Node*prev=NULL;
+    Node*head;
+    convert(root,prev,head);
+    
+    return head;
+}
