@@ -1,0 +1,53 @@
+bool isleaf(Node* root)
+ {
+     if(root->left==NULL && root->right==NULL)
+     {
+         return true;
+         
+     }
+     else
+     return false;
+ }
+ 
+ 
+ void traver(Node* root,vector<int>& col,vector<vector<int>>&res)
+ {
+     if(isleaf(root))
+     {
+         col.push_back(root->data);
+         
+         res.push_back(col);
+         col.pop_back();
+         return ;
+     }
+     col.push_back(root->data);
+     
+     
+     
+     if(root->left)
+     {
+        traver(root->left,col,res); 
+     }
+     if(root->right)
+     {
+         traver(root->right,col,res);
+     }
+     
+     col.pop_back();
+     
+     
+ }
+ 
+ 
+vector<vector<int>> Paths(Node* root)
+{
+   
+   vector<vector<int>> res;
+   
+   vector<int>col;
+   
+   traver(root,col,res);
+   
+   return res;
+   
+}
