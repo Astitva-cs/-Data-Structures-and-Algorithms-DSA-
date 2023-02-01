@@ -1,0 +1,31 @@
+    
+    pair<int,int> robhelp(TreeNode* root)
+    {
+        if(root==NULL)
+        {
+            return {0,0};
+        }
+
+        auto l=robhelp(root->left);
+        auto r=robhelp(root->right);
+
+        
+       int inclu=root->val+l.second+r.second;
+       int exclu=max(l.first,l.second)+max(r.first,r.second);
+         
+        
+        
+        return {inclu,exclu};
+
+    }
+
+ 
+  
+    int rob(TreeNode* root) {
+
+        auto p=robhelp(root);
+
+        return max(p.first,p.second);
+        
+    }
+};
