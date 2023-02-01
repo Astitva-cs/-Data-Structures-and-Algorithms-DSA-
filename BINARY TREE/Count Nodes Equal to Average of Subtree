@@ -1,0 +1,33 @@
+class Solution {
+public:
+
+    pair<int,int> avg(TreeNode* root,int &cnt)
+    {
+        if(root==NULL)
+        {
+            return {0,0};
+        }
+
+        auto l=avg(root->left,cnt);
+        auto r=avg(root->right,cnt);
+
+        int sum=l.first+r.first+root->val;
+        int num=l.second+r.second+1;
+        if(sum/num==root->val)
+        {
+            cnt++;
+        }
+
+        return {sum,num};
+
+    }
+
+    
+    int averageOfSubtree(TreeNode* root) {
+
+        int cnt=0;
+        avg(root,cnt);
+        return cnt;
+        
+    }
+};
